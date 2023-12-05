@@ -145,8 +145,25 @@ function AddEdge(x, y) {
     edges.push([x, y])
 }
 
+function SavePolygon() {
+    let output = ""
+
+    for (let cnt = 0; cnt < edges.length; cnt++) {
+        let positionSystem = CanvasToSystem(edges[cnt])
+
+        output += positionSystem[0] + "," + positionSystem[1] + "\n"
+    }
+
+    const blob = new Blob([output], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = "polygon.txt";
+    link.click();
+}
+
 async function main() {
     PutCheckBox("showingGrid", "Show Grid", false)
+    PutButton("savePolygon", "Save Polygon", SavePolygon)
 
     while (true) {
         Draw()
