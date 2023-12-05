@@ -37,6 +37,11 @@ function Draw() {
     SetColor("red")
     DrawCircleByVec(SystemToCanvas([0, 0]), 5)
 
+    // show mouse position
+    SetColor("black")
+    SetFont("20px Arial")
+    mouse_system_position = CanvasToSystem([GetMouseX(), GetMouseY()])
+    DrawText("Mouse: " + mouse_system_position[0] + ", " + mouse_system_position[1], 50, 50)
 }
 
 function Control() {
