@@ -103,7 +103,6 @@ function Control() {
         let nearest_edge = FindNearestEdgeIndex([GetMouseX(), GetMouseY()])
         edges.splice(nearest_edge, 1)
     } else if (!GetKey("KeyD")) {
-        Log("passed")
         flagDeleting = false;
     }
 }
