@@ -3,6 +3,20 @@ StopAllTouchDefaults();
 var edges = []
 var flagClicking = false;
 
+function CanvasToSystem(position) {
+    return [
+        position[0] - GetCanvasSize()[0] / 2,
+        position[1] - GetCanvasSize()[1] / 2
+    ]
+}
+
+function SystemToCanvas(position) {
+    return [
+        position[0] + GetCanvasSize()[0] / 2,
+        position[1] + GetCanvasSize()[1] / 2
+    ]
+}
+
 function Draw() {
     //reset canvas
     SetColor("white")
@@ -17,6 +31,12 @@ function Draw() {
     //draw polygon
     SetColor("#AFEEEE")
     DrawPolygon(edges)
+
+    //grids
+    //center
+    SetColor("red")
+    DrawCircleByVec(SystemToCanvas([0, 0]), 5)
+
 }
 
 function Control() {
