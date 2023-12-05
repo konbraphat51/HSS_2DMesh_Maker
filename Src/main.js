@@ -161,9 +161,14 @@ function SavePolygon() {
     link.click();
 }
 
+function Clear() {
+    edges = []
+}
+
 async function main() {
     PutCheckBox("showingGrid", "Show Grid", false)
     PutButton("savePolygon", "Save Polygon", SavePolygon)
+    PutButton("clear", "Clear", Clear)
 
     while (true) {
         Draw()
