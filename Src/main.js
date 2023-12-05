@@ -1,27 +1,39 @@
+StopAllTouchDefaults();
+
+var edges = []
+var flagClicking = false;
+
+function Draw() {
+    //reset canvas
+    SetColor("white")
+    DrawRect(0, 0, GetCanvasSize()[0], GetCanvasSize()[1])
+
+    //draw edges
+    SetColor("black")
+    edges.forEach(edge => {
+        DrawCircle(edge[0], edge[1], 5)
+    });
+}
+
+function Control() {
+    // if clicked...
+    if (GetMouse() & !flagClicking) {
+        flagClicking = true;
+        AddEdge(GetMouseX(), GetMouseY())
+    } else if (!GetMouse()) {
+        flagClicking = false;
+    }
+}
+
+function AddEdge(x, y) {
+    edges.push([x, y])
+}
+
 async function main() {
-    await Sleep(1000)
+    while (true) {
+        Draw()
+        Control()
 
-    DrawText("Hello World!", 100, 100)
-
-    await Sleep(1000)
-    
-    SetColor("red")
-    SetFont("50px serif")
-    DrawText("Let's Coding!", 100, 200)
-
-    await Sleep(1000)
-
-    
-    const chick = (await LoadImages(["/Assets/twimoji_chick.png"]))[0]
-    
-    while (true){
-        //clear
-        SetColor("white")
-        DrawRect(0, 0, GetCanvasSize()[0], GetCanvasSize()[1])
-
-        DrawImage(chick, GetMouseX(), GetMouseY(), 100, 100)
-    
-        //cool time
-        await Sleep(1000/16)
+        await Sleep(16)
     }
 }
