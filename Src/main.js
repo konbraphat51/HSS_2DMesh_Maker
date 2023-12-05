@@ -82,8 +82,9 @@ function ShowGrids() {
 }
 
 function Control() {
-    // if clicked...
+    // if clicked once...
     if (GetMouse() & !flagClicking) {
+        //...add edge
         flagClicking = true;
 
         if (GetCheckBoxValue("showingGrid", true)) {
@@ -96,8 +97,10 @@ function Control() {
         flagClicking = false;
     }
 
-    // if "d" key is pressed...
+    // if "d" key is pressed once...
     if (GetKey("KeyD") & !flagDeleting) {
+        //...delete nearest edge
+
         flagDeleting = true;
 
         let nearest_edge = FindNearestEdgeIndex([GetMouseX(), GetMouseY()])
