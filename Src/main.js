@@ -2,6 +2,7 @@ StopAllTouchDefaults();
 
 var edges = []
 var flagClicking = false;
+var flagDeleting = false;
 
 var grids_x = []
 var grids_y = []
@@ -94,6 +95,17 @@ function Control() {
     } else if (!GetMouse()) {
         flagClicking = false;
     }
+
+    // if "d" key is pressed...
+    if (GetKey("KeyD") & !flagDeleting) {
+        flagDeleting = true;
+
+        let nearest_edge = FindNearestEdgeIndex([GetMouseX(), GetMouseY()])
+        edges.splice(nearest_edge, 1)
+    } else if (!GetKey("KeyD")) {
+        Log("passed")
+        flagDeleting = false;
+    }
 }
 
 function FindNearestGrid(positionSystem) {
@@ -113,6 +125,18 @@ function FindNearestGrid(positionSystem) {
     })
 
     return [nearest_x, nearest_y]
+}
+
+function FindNearestEdgeIndex(positionCanvas) {
+    let nearest_edge_index = 0
+
+    edges.forEach((edge, index) => {
+        if (GetDistance(edge, positionCanvas) < GetDistance(edges[nearest_edge_index], positionCanvas)) {
+            nearest_edge_index = index
+        }
+    })
+
+    return nearest_edge_index
 }
 
 function AddEdge(x, y) {
