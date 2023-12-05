@@ -13,6 +13,10 @@ function Draw() {
     edges.forEach(edge => {
         DrawCircle(edge[0], edge[1], 5)
     });
+
+    //draw polygon
+    SetColor("#AFEEEE")
+    DrawPolygon(edges)
 }
 
 function Control() {
